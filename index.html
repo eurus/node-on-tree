@@ -2,23 +2,34 @@
 <head>
   <meta charset="UTF-8">
   <title>Node</title>
+  <script type='text/javascript' src='jquery-1.12.3.min.js'></script>
+  <script type='text/javascript' src='jquery-ui.min.js'></script>
   <script src="../javascripts/build/tracking-min.js"></script>
   <script src="../javascripts/build/data/face-min.js"></script>
+   <script type='text/javascript' src='node_modules/phaser/dist/phaser.min.js'></script>
+  <script type='text/javascript' src='fighter.js'>
+  </script>
   <style>
     #container {
         margin: 0px auto;
-        width: 500px;
-        height: 375px;
+        position: absolute;
+        right:0;
+        bottom:0;
+        width: 300px;
+        height: 225px;
         border: 10px #333 solid;
     }
     #cameraContainer {
-        width: 500px;
-        height: 375px;
+        width: 300px;
+        height: 225px;
         background-color: #666;
+        transform: rotateY(180deg);
+    -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+    -moz-transform:rotateY(180deg); /* Firefox */
     }
     canvas{
-        width: 500px;
-        height: 375px;
+        width: 300px;
+        height: 225px;
         background-color: transparent;
     }
   </style>
@@ -26,11 +37,13 @@
 <body>
   <div id="container">
       <video preload autoplay loop muted id="cameraContainer">
-       
+
       </video>
       <canvas id="canvas" width="320" height="240"></canvas>
   </div>
- 
+
   <script src="../javascripts/index.js"></script>
+
+  <button type='button' id='left-btn'>LEFT</button>
 </body>
 </html>
