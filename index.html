@@ -3,8 +3,34 @@
   <meta charset="UTF-8">
   <title>Node</title>
   <script src="../javascripts/build/tracking-min.js"></script>
+  <script src="../javascripts/build/data/face-min.js"></script>
+  <style>
+    #container {
+        margin: 0px auto;
+        width: 500px;
+        height: 375px;
+        border: 10px #333 solid;
+    }
+    #cameraContainer {
+        width: 500px;
+        height: 375px;
+        background-color: #666;
+    }
+    canvas{
+        width: 500px;
+        height: 375px;
+        background-color: transparent;
+    }
+  </style>
 </head>
 <body>
-  
+  <div id="container">
+      <video preload autoplay loop muted id="cameraContainer">
+       
+      </video>
+      <canvas id="canvas" width="320" height="240"></canvas>
+  </div>
+ 
+  <script src="../javascripts/index.js"></script>
 </body>
 </html>
