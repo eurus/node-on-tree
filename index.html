@@ -1,14 +1,14 @@
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Node</title>
-  <script type='text/javascript' src='jquery-1.12.3.min.js'></script>
+	<title>demo</title>
+</head>
+<body>
+	<canvas id="cavs" width="1024" height="768" style="border:1px solid black;">
+	</canvas>
+	  <script type='text/javascript' src='jquery-1.12.3.min.js'></script>
   <script type='text/javascript' src='jquery-ui.min.js'></script>
   <script src="../javascripts/build/tracking-min.js"></script>
   <script src="../javascripts/build/data/face-min.js"></script>
-   <script type='text/javascript' src='node_modules/phaser/dist/phaser.min.js'></script>
-  <script type='text/javascript' src='fighter.js'>
-  </script>
   <style>
     #container {
         margin: 0px auto;
@@ -33,17 +33,165 @@
         background-color: transparent;
     }
   </style>
-</head>
-<body>
-  <div id="container">
+	<script type="text/javascript">
+		var canvas = document.getElementById("cavs");
+		var ctx=canvas.getContext('2d');
+		var x = 150 ;
+		var y = 150;
+		var width = 0;
+		var height = 0;
+
+		var bananax = 20;
+		var bananay = 50;
+		var bananaw = 0;
+		var bananah = 0;
+
+		var img = new Image();
+		img.src = "mokeyPic.jpg";
+		img.onload = function() {
+			ctx.drawImage(img,x,y);
+			width = img.width;
+			height = img.height;
+		}
+
+		var img2 = new Image();
+		img2.src = "leftB.jpg";
+		img2.onload = function() {
+			ctx.drawImage(img2,bananax,bananay);
+			bananaw = img2.width;
+			bananah = img2.height;
+		}
+
+		document.onkeydown= keyDown;
+		function keyDown(e) {
+			var ev = e || window.event;
+			switch(ev.keyCode) {
+				case 37:
+					moveLeft(ctx);
+					break;
+				case 40:
+					moveDown(ctx);
+					break;
+				case 38:
+					moveUp(ctx);
+					break;
+				case 39:
+					moveRight(ctx);
+					break;
+
+			}
+
+		}
+
+		function moveUp(ctx) {
+			ctx.clearRect(x,y,width,height);
+			// ctx.fillStyle = "red";
+			y-=20;
+			if(y<=0) {
+				y=0;
+			}
+
+			delBananaOne(ctx);
+			ctx.drawImage(img,x,y);
+			// ctx.fillRect(x,y,width,height);
+		}
+
+		function moveLeft(ctx) {
+			ctx.clearRect(x,y,width,height);
+			x-=20;
+			if(x<=0) {
+				x = 0 ;
+			}
+			delBananaOne(ctx);
+			ctx.drawImage(img,x,y);
+		}
+
+		function moveRight(ctx) {
+			ctx.clearRect(x,y,width,height);
+			x+=20;
+			if(x>=1024) {
+				x = 1024;
+			}
+			delBananaOne(ctx);
+			ctx.drawImage(img,x,y);
+		}
+
+		function moveDown(ctx) {
+			ctx.clearRect(x,y,width,height);
+			y+=20;
+			if(y>=768) {
+				y = 768;
+			}
+			delBananaOne(ctx);
+			ctx.drawImage(img,x,y);
+			// random();
+		}
+
+		function delBananaOne(ctx) {
+		    if(x<bananax) {
+		    	//x在香蕉左边
+		    	if(bananax-x-width<=0) {
+		    		if(bananay>=y) {
+		    			if(bananay-y-height<=0) {
+			    			//在香蕉上面
+		    				ctx.clearRect(bananax,bananay,bananaw,bananah);
+		    				randomShowBanana(ctx);
+		    			}
+		    		} else {
+		    			if(y-bananay-bananah<=0) {
+		    				ctx.clearRect(bananax,bananay,bananaw,bananah);
+		    				randomShowBanana(ctx);
+		    			}
+		    		}
+		    	}
+		    } else {
+		    	//x在香蕉右边
+		    	if(x-bananax-bananaw<=0) {
+		    		if(bananay>=y) {
+		    			if(bananay-y-height<=0) {
+		    				ctx.clearRect(bananax,bananay,bananaw,bananah);
+		    				randomShowBanana(ctx);
+		    			}
+		    		} else {
+		    			if(y-bananay-bananah<=0) {
+		    				ctx.clearRect(bananax,bananay,bananaw,bananah);
+		    				randomShowBanana(ctx);
+		    			}
+		    		}
+		    	}
+
+		    }
+		}
+
+		function randomShowBanana(ctx) {
+			var originx = bananax;
+			var originy = bananax;
+			var newX = rdom(1024-bananaw,0);
+			var newY = rdom(768-bananah,0);
+			if(newX != originx || newY != originy) {
+				bananax = newX;
+				bananay = newY;
+				ctx.drawImage(img2,bananax,bananay);
+			}
+
+		}
+
+		function rdom(pa,pb) {
+    		var a;
+    		a = Math.floor(Math.random() * pa+pb);
+    		return a;
+		}
+
+
+	</script>
+	<div id="container">
       <video preload autoplay loop muted id="cameraContainer">
 
       </video>
-      <canvas id="canvas" width="320" height="240"></canvas>
+      <canvas id="canvas" width="640" height="480"></canvas>
   </div>
 
   <script src="../javascripts/index.js"></script>
 
-  <button type='button' id='left-btn'>LEFT</button>
 </body>
 </html>

@@ -14,6 +14,9 @@ window.onload = function() {
         camera: true
     });
 
+    $('#left-btn').click(function() {
+        player.body.velocity.x = -200;
+    });
     tracker.on('track', function(event) {
         context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -42,40 +45,33 @@ window.onload = function() {
 
                 lastX = rect.x;
                 lastY = rect.y;
-                // console.log('rect '+rect.width+' x '+rect.height);
-                // console.log('rect x = '+rect.x+', y = '+rect.y);
+                console.log('rect '+rect.width+' x '+rect.height);
+                console.log('rect x = '+rect.x+', y = '+rect.y);
                 // console.log(changeX);
                 // console.log(changeY);
                 if (changeX <= 0) {
-                    moveRight(ctx);
-                    console.log('moving right');
-                } else {
-                    moveLeft(ctx);
+                    player.body.velocity.x = 300;
                     console.log('moving left');
+                } else {
+                    player.body.velocity.x = -300;
+                    console.log('moving right');
 
-                    // $(document).on("keydown", function(event) {
-                    //     switch (event.which) {
-                    //         case $.ui.which.LEFT:
-                    //             console.log("left");
-                    //             break;
-                    //         case $.ui.which.RIGHT:
-                    //             console.log("right");
-                    //             break;
-                    //         case $.ui.which.UP:
-                    //             console.log("up");
-                    //             break;
-                    //         case $.ui.which.DOWN:
-                    //             console.log("down");
-                    //             break;
-                    //     }
-                    // });
-                }
-                if(changeY <=0){
-                    moveUp(ctx);
-                    console.log('moving up');
-                }else{
-                    moveDown(ctx);
-                    console.log('moving down');
+                    $(document).on("keydown", function(event) {
+                        switch (event.which) {
+                            case $.ui.which.LEFT:
+                                console.log("left");
+                                break;
+                            case $.ui.which.RIGHT:
+                                console.log("right");
+                                break;
+                            case $.ui.which.UP:
+                                console.log("up");
+                                break;
+                            case $.ui.which.DOWN:
+                                console.log("down");
+                                break;
+                        }
+                    });
                 }
 
             });
