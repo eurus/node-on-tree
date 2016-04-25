@@ -21,9 +21,7 @@ window.onload = function() {
 
         } else {
             event.data.forEach(function(rect) {
-                // rect.x, rect.y, rect.height, rect.width
-                // console.log("rect width "+ rect.width);
-                // console.log("rect height"+ rect.height);
+                
                 context.strokeStyle = '#a64ceb';
                 context.strokeRect(rect.x, rect.y, rect.width, rect.height);
                 context.font = '11px Helvetica';
@@ -42,33 +40,13 @@ window.onload = function() {
 
                 lastX = rect.x;
                 lastY = rect.y;
-                // console.log('rect '+rect.width+' x '+rect.height);
-                // console.log('rect x = '+rect.x+', y = '+rect.y);
-                // console.log(changeX);
-                // console.log(changeY);
+                
                 if (changeX <= 0) {
                     moveRight(ctx);
                     console.log('moving right');
                 } else {
                     moveLeft(ctx);
                     console.log('moving left');
-
-                    // $(document).on("keydown", function(event) {
-                    //     switch (event.which) {
-                    //         case $.ui.which.LEFT:
-                    //             console.log("left");
-                    //             break;
-                    //         case $.ui.which.RIGHT:
-                    //             console.log("right");
-                    //             break;
-                    //         case $.ui.which.UP:
-                    //             console.log("up");
-                    //             break;
-                    //         case $.ui.which.DOWN:
-                    //             console.log("down");
-                    //             break;
-                    //     }
-                    // });
                 }
                 if(changeY <=0){
                     moveUp(ctx);
